@@ -1,0 +1,34 @@
+[
+    {
+        "model": "users.appuser",
+        "pk": 1,
+        "fields": {
+            "password": "pbkdf2_sha256$1000000$vxGyPVPWfzDupXOGWzXTPx$1VcjGVc0C0C3TygYrPXIU8PP5fkZaCRLzZ7ev2zsHpM=",
+            "last_login": null,
+            "is_superuser": true,
+            "username": "admin",
+            "first_name": "Admin",
+            "last_name": "User",
+            "email": "admin@example.com",
+            "is_staff": true,
+            "is_active": true,
+            "date_joined": "2023-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "users.appuser",
+        "pk": 2,
+        "fields": {
+            "password": "pbkdf2_sha256$1000000$vxGyPVPWfzDupXOGWzXTPx$1VcjGVc0C0C3TygYrPXIU8PP5fkZaCRLzZ7ev2zsHpM=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "spingebob",
+            "first_name": "Spongebob",
+            "last_name": "Squarepants",
+            "email": "spingebob@squarepants.com",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2023-01-01T00:00:00Z"
+        }
+    }
+]

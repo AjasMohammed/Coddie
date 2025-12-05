@@ -1,0 +1,674 @@
+[
+    {
+        "model": "problems.problem",
+        "pk": 6,
+        "fields": {
+            "title": "Valid Parentheses",
+            "slug": "valid-parentheses",
+            "description": "Given a string `s` containing just the characters `'('`, `')'`, `'{'`, `'}'`, `'['` and `']'`, determine if the input string is valid.\n\nAn input string is valid if:\n1. Open brackets must be closed by the same type of brackets.\n2. Open brackets must be closed in the correct order.\n3. Every close bracket has a corresponding open bracket of the same type.\n\n**Example 1:**\n```\nInput: s = \"()\"\nOutput: true\n```\n\n**Example 2:**\n```\nInput: s = \"()[]{}\"\nOutput: true\n```\n\n**Example 3:**\n```\nInput: s = \"(]\"\nOutput: false\n```\n\n**Constraints:**\n- `1 <= s.length <= 10^4`\n- `s` consists of parentheses only `'()[]{}'`.",
+            "difficulty": "Easy",
+            "time_limit": 1.0,
+            "memory_limit": 128000,
+            "test_cases": [
+                { "input": ["()"], "output": true },
+                { "input": ["()[]{}"], "output": true },
+                { "input": ["(]"], "output": false },
+                { "input": ["([)]"], "output": false },
+                { "input": ["{[]}"], "output": true },
+                { "input": [""], "output": true },
+                { "input": ["("], "output": false },
+                { "input": [")"], "output": false },
+                { "input": ["(((("], "output": false },
+                { "input": ["))))"], "output": false },
+                { "input": ["({[]})"], "output": true },
+                { "input": ["({[}])"], "output": false },
+                { "input": ["(({{[[]]}}))"], "output": true },
+                { "input": ["(()"], "output": false },
+                { "input": ["())"], "output": false }
+            ],
+            "function_name": "isValid",
+            "return_type": "bool",
+            "argument_types": ["string"],
+            "starter_code": "",
+            "created_by": 1,
+            "language": null,
+            "is_public": true,
+            "created_at": "2023-01-01T00:00:00Z",
+            "updated_at": "2023-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "problems.problem",
+        "pk": 7,
+        "fields": {
+            "title": "Merge Two Sorted Lists",
+            "slug": "merge-two-sorted-lists",
+            "description": "You are given the heads of two sorted linked lists `list1` and `list2`.\n\nMerge the two lists into one sorted list. The list should be made by splicing together the nodes of the first two lists.\n\nReturn the head of the merged linked list.\n\n**Example 1:**\n```\nInput: list1 = [1,2,4], list2 = [1,3,4]\nOutput: [1,1,2,3,4,4]\n```\n\n**Example 2:**\n```\nInput: list1 = [], list2 = []\nOutput: []\n```\n\n**Example 3:**\n```\nInput: list1 = [], list2 = [0]\nOutput: [0]\n```\n\n**Constraints:**\n- The number of nodes in both lists is in the range `[0, 50]`.\n- `-100 <= Node.val <= 100`\n- Both `list1` and `list2` are sorted in non-decreasing order.",
+            "difficulty": "Easy",
+            "time_limit": 1.0,
+            "memory_limit": 128000,
+            "test_cases": [
+                {
+                    "input": [
+                        [1, 2, 4],
+                        [1, 3, 4]
+                    ],
+                    "output": [1, 1, 2, 3, 4, 4]
+                },
+                { "input": [[], []], "output": [] },
+                { "input": [[], [0]], "output": [0] },
+                { "input": [[1], []], "output": [1] },
+                {
+                    "input": [
+                        [1, 3, 5],
+                        [2, 4, 6]
+                    ],
+                    "output": [1, 2, 3, 4, 5, 6]
+                },
+                {
+                    "input": [
+                        [1, 1, 1],
+                        [1, 1, 1]
+                    ],
+                    "output": [1, 1, 1, 1, 1, 1]
+                },
+                {
+                    "input": [
+                        [-10, -5, 0],
+                        [-8, -3, 1]
+                    ],
+                    "output": [-10, -8, -5, -3, 0, 1]
+                },
+                { "input": [[1], [2]], "output": [1, 2] },
+                { "input": [[2], [1]], "output": [1, 2] },
+                {
+                    "input": [
+                        [1, 2, 3, 4, 5],
+                        [6, 7, 8, 9, 10]
+                    ],
+                    "output": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                }
+            ],
+            "function_name": "mergeTwoLists",
+            "return_type": "int[]",
+            "argument_types": ["int[]", "int[]"],
+            "starter_code": "",
+            "created_by": 1,
+            "language": null,
+            "is_public": true,
+            "created_at": "2023-01-01T00:00:00Z",
+            "updated_at": "2023-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "problems.problem",
+        "pk": 8,
+        "fields": {
+            "title": "Maximum Subarray",
+            "slug": "maximum-subarray",
+            "description": "Given an integer array `nums`, find the subarray with the largest sum, and return its sum.\n\n**Example 1:**\n```\nInput: nums = [-2,1,-3,4,-1,2,1,-5,4]\nOutput: 6\nExplanation: The subarray [4,-1,2,1] has the largest sum 6.\n```\n\n**Example 2:**\n```\nInput: nums = [1]\nOutput: 1\nExplanation: The subarray [1] has the largest sum 1.\n```\n\n**Example 3:**\n```\nInput: nums = [5,4,-1,7,8]\nOutput: 23\nExplanation: The subarray [5,4,-1,7,8] has the largest sum 23.\n```\n\n**Constraints:**\n- `1 <= nums.length <= 10^5`\n- `-10^4 <= nums[i] <= 10^4`\n\n**Follow up:** If you have figured out the O(n) solution, try coding another solution using the divide and conquer approach.",
+            "difficulty": "Medium",
+            "time_limit": 2.0,
+            "memory_limit": 256000,
+            "test_cases": [
+                { "input": [[-2, 1, -3, 4, -1, 2, 1, -5, 4]], "output": 6 },
+                { "input": [[1]], "output": 1 },
+                { "input": [[5, 4, -1, 7, 8]], "output": 23 },
+                { "input": [[-1]], "output": -1 },
+                { "input": [[-2, -1]], "output": -1 },
+                { "input": [[1, 2, 3, 4, 5]], "output": 15 },
+                { "input": [[-5, -4, -3, -2, -1]], "output": -1 },
+                { "input": [[0]], "output": 0 },
+                { "input": [[0, 0, 0]], "output": 0 },
+                { "input": [[1, -1, 1, -1, 1]], "output": 1 },
+                { "input": [[100, -1, 100]], "output": 199 },
+                { "input": [[-1, 0, -2]], "output": 0 },
+                { "input": [[8, -19, 5, -4, 20]], "output": 21 }
+            ],
+            "function_name": "maxSubArray",
+            "return_type": "int",
+            "argument_types": ["int[]"],
+            "starter_code": "",
+            "created_by": 1,
+            "language": null,
+            "is_public": true,
+            "created_at": "2023-01-01T00:00:00Z",
+            "updated_at": "2023-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "problems.problem",
+        "pk": 9,
+        "fields": {
+            "title": "Binary Tree Level Order Traversal",
+            "slug": "binary-tree-level-order-traversal",
+            "description": "Given the `root` of a binary tree, return the level order traversal of its nodes' values. (i.e., from left to right, level by level).\n\n**Example 1:**\n```\nInput: root = [3,9,20,null,null,15,7]\nOutput: [[3],[9,20],[15,7]]\n```\n\n**Example 2:**\n```\nInput: root = [1]\nOutput: [[1]]\n```\n\n**Example 3:**\n```\nInput: root = []\nOutput: []\n```\n\n**Constraints:**\n- The number of nodes in the tree is in the range `[0, 2000]`.\n- `-1000 <= Node.val <= 1000`\n\n**Note:** For this problem, the tree is represented as an array where `null` represents missing nodes.",
+            "difficulty": "Medium",
+            "time_limit": 2.0,
+            "memory_limit": 256000,
+            "test_cases": [
+                {
+                    "input": [[3, 9, 20, null, null, 15, 7]],
+                    "output": [[3], [9, 20], [15, 7]]
+                },
+                { "input": [[1]], "output": [[1]] },
+                { "input": [[]], "output": [] },
+                { "input": [[1, 2, 3, 4, 5]], "output": [[1], [2, 3], [4, 5]] },
+                { "input": [[1, null, 2]], "output": [[1], [2]] },
+                {
+                    "input": [[1, 2, null, 3, null, 4]],
+                    "output": [[1], [2], [3], [4]]
+                },
+                { "input": [[0]], "output": [[0]] },
+                {
+                    "input": [[-10, -5, 5, null, -7, null, 8]],
+                    "output": [[-10], [-5, 5], [-7, 8]]
+                },
+                {
+                    "input": [[1, 2, 3, 4, 5, 6, 7]],
+                    "output": [[1], [2, 3], [4, 5, 6, 7]]
+                }
+            ],
+            "function_name": "levelOrder",
+            "return_type": "int[][]",
+            "argument_types": ["int[]"],
+            "starter_code": "",
+            "created_by": 1,
+            "language": null,
+            "is_public": true,
+            "created_at": "2023-01-01T00:00:00Z",
+            "updated_at": "2023-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "problems.problem",
+        "pk": 10,
+        "fields": {
+            "title": "Longest Palindromic Substring",
+            "slug": "longest-palindromic-substring",
+            "description": "Given a string `s`, return the longest palindromic substring in `s`.\n\n**Example 1:**\n```\nInput: s = \"babad\"\nOutput: \"bab\"\nExplanation: \"aba\" is also a valid answer.\n```\n\n**Example 2:**\n```\nInput: s = \"cbbd\"\nOutput: \"bb\"\n```\n\n**Constraints:**\n- `1 <= s.length <= 1000`\n- `s` consist of only digits and English letters.\n\n**Note:** If there are multiple valid answers, return any one of them.",
+            "difficulty": "Medium",
+            "time_limit": 2.0,
+            "memory_limit": 256000,
+            "test_cases": [
+                { "input": ["babad"], "output": "bab" },
+                { "input": ["cbbd"], "output": "bb" },
+                { "input": ["a"], "output": "a" },
+                { "input": ["ac"], "output": "a" },
+                { "input": ["racecar"], "output": "racecar" },
+                { "input": ["noon"], "output": "noon" },
+                { "input": ["abcdef"], "output": "a" },
+                { "input": ["aaaaaa"], "output": "aaaaaa" },
+                { "input": ["abacabad"], "output": "abacaba" },
+                { "input": ["abb"], "output": "bb" },
+                { "input": ["ccc"], "output": "ccc" },
+                { "input": ["bananas"], "output": "anana" }
+            ],
+            "function_name": "longestPalindrome",
+            "return_type": "string",
+            "argument_types": ["string"],
+            "starter_code": "",
+            "created_by": 1,
+            "language": null,
+            "is_public": true,
+            "created_at": "2023-01-01T00:00:00Z",
+            "updated_at": "2023-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "problems.problem",
+        "pk": 11,
+        "fields": {
+            "title": "Container With Most Water",
+            "slug": "container-with-most-water",
+            "description": "You are given an integer array `height` of length `n`. There are `n` vertical lines drawn such that the two endpoints of the `i-th` line are `(i, 0)` and `(i, height[i])`.\n\nFind two lines that together with the x-axis form a container, such that the container contains the most water.\n\nReturn the maximum amount of water a container can store.\n\n**Notice** that you may not slant the container.\n\n**Example 1:**\n```\nInput: height = [1,8,6,2,5,4,8,3,7]\nOutput: 49\nExplanation: The vertical lines are at indices 1 and 8, with heights 8 and 7. The area is min(8,7) * (8-1) = 49.\n```\n\n**Example 2:**\n```\nInput: height = [1,1]\nOutput: 1\n```\n\n**Constraints:**\n- `n == height.length`\n- `2 <= n <= 10^5`\n- `0 <= height[i] <= 10^4`",
+            "difficulty": "Medium",
+            "time_limit": 2.0,
+            "memory_limit": 256000,
+            "test_cases": [
+                { "input": [[1, 8, 6, 2, 5, 4, 8, 3, 7]], "output": 49 },
+                { "input": [[1, 1]], "output": 1 },
+                { "input": [[4, 3, 2, 1, 4]], "output": 16 },
+                { "input": [[1, 2, 1]], "output": 2 },
+                { "input": [[2, 3, 4, 5, 18, 17, 6]], "output": 17 },
+                { "input": [[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]], "output": 25 },
+                { "input": [[10, 9, 8, 7, 6, 5, 4, 3, 2, 1]], "output": 25 },
+                { "input": [[5, 5, 5, 5]], "output": 15 },
+                { "input": [[0, 2]], "output": 0 },
+                { "input": [[2, 0, 2]], "output": 4 },
+                { "input": [[100, 1, 1, 1, 1, 1, 1, 100]], "output": 700 }
+            ],
+            "function_name": "maxArea",
+            "return_type": "int",
+            "argument_types": ["int[]"],
+            "starter_code": "",
+            "created_by": 1,
+            "language": null,
+            "is_public": true,
+            "created_at": "2023-01-01T00:00:00Z",
+            "updated_at": "2023-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "problems.problem",
+        "pk": 12,
+        "fields": {
+            "title": "Climbing Stairs",
+            "slug": "climbing-stairs",
+            "description": "You are climbing a staircase. It takes `n` steps to reach the top.\n\nEach time you can either climb `1` or `2` steps. In how many distinct ways can you climb to the top?\n\n**Example 1:**\n```\nInput: n = 2\nOutput: 2\nExplanation: There are two ways to climb to the top.\n1. 1 step + 1 step\n2. 2 steps\n```\n\n**Example 2:**\n```\nInput: n = 3\nOutput: 3\nExplanation: There are three ways to climb to the top.\n1. 1 step + 1 step + 1 step\n2. 1 step + 2 steps\n3. 2 steps + 1 step\n```\n\n**Constraints:**\n- `1 <= n <= 45`",
+            "difficulty": "Easy",
+            "time_limit": 1.0,
+            "memory_limit": 128000,
+            "test_cases": [
+                { "input": [2], "output": 2 },
+                { "input": [3], "output": 3 },
+                { "input": [1], "output": 1 },
+                { "input": [4], "output": 5 },
+                { "input": [5], "output": 8 },
+                { "input": [10], "output": 89 },
+                { "input": [20], "output": 10946 },
+                { "input": [30], "output": 1346269 },
+                { "input": [35], "output": 14930352 },
+                { "input": [40], "output": 165580141 },
+                { "input": [45], "output": 1836311903 }
+            ],
+            "function_name": "climbStairs",
+            "return_type": "int",
+            "argument_types": ["int"],
+            "starter_code": "",
+            "created_by": 1,
+            "language": null,
+            "is_public": true,
+            "created_at": "2023-01-01T00:00:00Z",
+            "updated_at": "2023-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "problems.problem",
+        "pk": 13,
+        "fields": {
+            "title": "Coin Change",
+            "slug": "coin-change",
+            "description": "You are given an integer array `coins` representing coins of different denominations and an integer `amount` representing a total amount of money.\n\nReturn the fewest number of coins that you need to make up that amount. If that amount of money cannot be made up by any combination of the coins, return `-1`.\n\nYou may assume that you have an infinite number of each kind of coin.\n\n**Example 1:**\n```\nInput: coins = [1,2,5], amount = 11\nOutput: 3\nExplanation: 11 = 5 + 5 + 1\n```\n\n**Example 2:**\n```\nInput: coins = [2], amount = 3\nOutput: -1\n```\n\n**Example 3:**\n```\nInput: coins = [1], amount = 0\nOutput: 0\n```\n\n**Constraints:**\n- `1 <= coins.length <= 12`\n- `1 <= coins[i] <= 2^31 - 1`\n- `0 <= amount <= 10^4`",
+            "difficulty": "Medium",
+            "time_limit": 2.0,
+            "memory_limit": 256000,
+            "test_cases": [
+                { "input": [[1, 2, 5], 11], "output": 3 },
+                { "input": [[2], 3], "output": -1 },
+                { "input": [[1], 0], "output": 0 },
+                { "input": [[1], 1], "output": 1 },
+                { "input": [[1], 2], "output": 2 },
+                { "input": [[1, 2, 5], 100], "output": 20 },
+                { "input": [[186, 419, 83, 408], 6249], "output": 20 },
+                { "input": [[1, 3, 4, 5], 7], "output": 2 },
+                { "input": [[2, 5, 10, 1], 27], "output": 4 },
+                { "input": [[1, 5, 10, 25], 63], "output": 6 },
+                { "input": [[3, 7, 405, 436], 8839], "output": 25 }
+            ],
+            "function_name": "coinChange",
+            "return_type": "int",
+            "argument_types": ["int[]", "int"],
+            "starter_code": "",
+            "created_by": 1,
+            "language": null,
+            "is_public": true,
+            "created_at": "2023-01-01T00:00:00Z",
+            "updated_at": "2023-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "problems.problem",
+        "pk": 14,
+        "fields": {
+            "title": "Word Search",
+            "slug": "word-search",
+            "description": "Given an `m x n` grid of characters `board` and a string `word`, return `true` if `word` exists in the grid.\n\nThe word can be constructed from letters of sequentially adjacent cells, where adjacent cells are horizontally or vertically neighboring. The same letter cell may not be used more than once.\n\n**Example 1:**\n```\nInput: board = [[\"A\",\"B\",\"C\",\"E\"],[\"S\",\"F\",\"C\",\"S\"],[\"A\",\"D\",\"E\",\"E\"]], word = \"ABCCED\"\nOutput: true\n```\n\n**Example 2:**\n```\nInput: board = [[\"A\",\"B\",\"C\",\"E\"],[\"S\",\"F\",\"C\",\"S\"],[\"A\",\"D\",\"E\",\"E\"]], word = \"SEE\"\nOutput: true\n```\n\n**Example 3:**\n```\nInput: board = [[\"A\",\"B\",\"C\",\"E\"],[\"S\",\"F\",\"C\",\"S\"],[\"A\",\"D\",\"E\",\"E\"]], word = \"ABCB\"\nOutput: false\n```\n\n**Constraints:**\n- `m == board.length`\n- `n = board[i].length`\n- `1 <= m, n <= 6`\n- `1 <= word.length <= 15`\n- `board` and `word` consists of only lowercase and uppercase English letters.",
+            "difficulty": "Medium",
+            "time_limit": 3.0,
+            "memory_limit": 256000,
+            "test_cases": [
+                {
+                    "input": [
+                        [
+                            ["A", "B", "C", "E"],
+                            ["S", "F", "C", "S"],
+                            ["A", "D", "E", "E"]
+                        ],
+                        "ABCCED"
+                    ],
+                    "output": true
+                },
+                {
+                    "input": [
+                        [
+                            ["A", "B", "C", "E"],
+                            ["S", "F", "C", "S"],
+                            ["A", "D", "E", "E"]
+                        ],
+                        "SEE"
+                    ],
+                    "output": true
+                },
+                {
+                    "input": [
+                        [
+                            ["A", "B", "C", "E"],
+                            ["S", "F", "C", "S"],
+                            ["A", "D", "E", "E"]
+                        ],
+                        "ABCB"
+                    ],
+                    "output": false
+                },
+                { "input": [[["A"]], "A"], "output": true },
+                { "input": [[["A"]], "B"], "output": false },
+                {
+                    "input": [
+                        [
+                            ["A", "B"],
+                            ["C", "D"]
+                        ],
+                        "ABDC"
+                    ],
+                    "output": true
+                },
+                {
+                    "input": [
+                        [
+                            ["A", "B"],
+                            ["C", "D"]
+                        ],
+                        "ACDB"
+                    ],
+                    "output": true
+                },
+                {
+                    "input": [
+                        [
+                            ["A", "B"],
+                            ["C", "D"]
+                        ],
+                        "ABCD"
+                    ],
+                    "output": false
+                },
+                {
+                    "input": [
+                        [
+                            ["C", "A", "A"],
+                            ["A", "A", "A"],
+                            ["B", "C", "D"]
+                        ],
+                        "AAB"
+                    ],
+                    "output": true
+                }
+            ],
+            "function_name": "exist",
+            "return_type": "bool",
+            "argument_types": ["string[][]", "string"],
+            "starter_code": "",
+            "created_by": 1,
+            "language": null,
+            "is_public": true,
+            "created_at": "2023-01-01T00:00:00Z",
+            "updated_at": "2023-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "problems.problem",
+        "pk": 15,
+        "fields": {
+            "title": "Trapping Rain Water",
+            "slug": "trapping-rain-water",
+            "description": "Given `n` non-negative integers representing an elevation map where the width of each bar is `1`, compute how much water it can trap after raining.\n\n**Example 1:**\n```\nInput: height = [0,1,0,2,1,0,1,3,2,1,2,1]\nOutput: 6\nExplanation: The elevation map is represented by array [0,1,0,2,1,0,1,3,2,1,2,1]. In this case, 6 units of rain water are being trapped.\n```\n\n**Example 2:**\n```\nInput: height = [4,2,0,3,2,5]\nOutput: 9\n```\n\n**Constraints:**\n- `n == height.length`\n- `1 <= n <= 2 * 10^4`\n- `0 <= height[i] <= 10^5`",
+            "difficulty": "Hard",
+            "time_limit": 3.0,
+            "memory_limit": 512000,
+            "test_cases": [
+                {
+                    "input": [[0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]],
+                    "output": 6
+                },
+                { "input": [[4, 2, 0, 3, 2, 5]], "output": 9 },
+                { "input": [[0, 0, 0, 0]], "output": 0 },
+                { "input": [[5]], "output": 0 },
+                { "input": [[5, 4, 3, 2, 1]], "output": 0 },
+                { "input": [[1, 2, 3, 4, 5]], "output": 0 },
+                { "input": [[3, 0, 2, 0, 4]], "output": 7 },
+                { "input": [[5, 2, 1, 2, 1, 5]], "output": 14 },
+                { "input": [[2, 0, 2]], "output": 2 },
+                { "input": [[3, 0, 0, 2, 0, 4]], "output": 10 },
+                { "input": [[0, 1, 0, 1, 0, 1, 0]], "output": 2 },
+                { "input": [[4, 2, 3]], "output": 1 }
+            ],
+            "function_name": "trap",
+            "return_type": "int",
+            "argument_types": ["int[]"],
+            "starter_code": "",
+            "created_by": 1,
+            "language": null,
+            "is_public": true,
+            "created_at": "2023-01-01T00:00:00Z",
+            "updated_at": "2023-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "problems.problem",
+        "pk": 16,
+        "fields": {
+            "title": "Median of Two Sorted Arrays",
+            "slug": "median-of-two-sorted-arrays",
+            "description": "Given two sorted arrays `nums1` and `nums2` of size `m` and `n` respectively, return the median of the two sorted arrays.\n\nThe overall run time complexity should be `O(log (m+n))`.\n\n**Example 1:**\n```\nInput: nums1 = [1,3], nums2 = [2]\nOutput: 2.00000\nExplanation: merged array = [1,2,3] and median is 2.\n```\n\n**Example 2:**\n```\nInput: nums1 = [1,2], nums2 = [3,4]\nOutput: 2.50000\nExplanation: merged array = [1,2,3,4] and median is (2 + 3) / 2 = 2.5.\n```\n\n**Constraints:**\n- `nums1.length == m`\n- `nums2.length == n`\n- `0 <= m <= 1000`\n- `0 <= n <= 1000`\n- `1 <= m + n <= 2000`\n- `-10^6 <= nums1[i], nums2[i] <= 10^6`",
+            "difficulty": "Hard",
+            "time_limit": 3.0,
+            "memory_limit": 512000,
+            "test_cases": [
+                { "input": [[1, 3], [2]], "output": 2.0 },
+                {
+                    "input": [
+                        [1, 2],
+                        [3, 4]
+                    ],
+                    "output": 2.5
+                },
+                { "input": [[], [1]], "output": 1.0 },
+                { "input": [[2], []], "output": 2.0 },
+                { "input": [[1], [2, 3, 4, 5, 6]], "output": 3.5 },
+                {
+                    "input": [
+                        [1, 2, 3, 4, 5],
+                        [6, 7, 8, 9, 10]
+                    ],
+                    "output": 5.5
+                },
+                {
+                    "input": [
+                        [1, 3, 5, 7, 9],
+                        [2, 4, 6, 8, 10]
+                    ],
+                    "output": 5.5
+                },
+                {
+                    "input": [
+                        [1, 1, 1],
+                        [1, 1, 1]
+                    ],
+                    "output": 1.0
+                },
+                {
+                    "input": [
+                        [-5, -3, -1],
+                        [0, 2, 4]
+                    ],
+                    "output": -0.5
+                },
+                { "input": [[100000], [100001]], "output": 100000.5 },
+                {
+                    "input": [
+                        [1, 2],
+                        [1, 2]
+                    ],
+                    "output": 1.5
+                }
+            ],
+            "function_name": "findMedianSortedArrays",
+            "return_type": "float",
+            "argument_types": ["int[]", "int[]"],
+            "starter_code": "",
+            "created_by": 1,
+            "language": null,
+            "is_public": true,
+            "created_at": "2023-01-01T00:00:00Z",
+            "updated_at": "2023-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "problems.problem",
+        "pk": 17,
+        "fields": {
+            "title": "Longest Increasing Subsequence",
+            "slug": "longest-increasing-subsequence",
+            "description": "Given an integer array `nums`, return the length of the longest strictly increasing subsequence.\n\n**Example 1:**\n```\nInput: nums = [10,9,2,5,3,7,101,18]\nOutput: 4\nExplanation: The longest increasing subsequence is [2,3,7,101], therefore the length is 4.\n```\n\n**Example 2:**\n```\nInput: nums = [0,1,0,3,2,3]\nOutput: 4\n```\n\n**Example 3:**\n```\nInput: nums = [7,7,7,7,7,7,7]\nOutput: 1\n```\n\n**Constraints:**\n- `1 <= nums.length <= 2500`\n- `-10^4 <= nums[i] <= 10^4`\n\n**Follow up:** Can you come up with an algorithm that runs in `O(n log(n))` time complexity?",
+            "difficulty": "Medium",
+            "time_limit": 2.0,
+            "memory_limit": 256000,
+            "test_cases": [
+                { "input": [[10, 9, 2, 5, 3, 7, 101, 18]], "output": 4 },
+                { "input": [[0, 1, 0, 3, 2, 3]], "output": 4 },
+                { "input": [[7, 7, 7, 7, 7, 7, 7]], "output": 1 },
+                { "input": [[1]], "output": 1 },
+                { "input": [[1, 2, 3, 4, 5]], "output": 5 },
+                { "input": [[5, 4, 3, 2, 1]], "output": 1 },
+                { "input": [[1, 3, 6, 7, 9, 4, 10, 5, 6]], "output": 6 },
+                { "input": [[0]], "output": 1 },
+                { "input": [[-1, -2, -3, -4, -5]], "output": 1 },
+                { "input": [[1, 2, 1, 2, 1, 2]], "output": 2 },
+                { "input": [[10, 9, 2, 5, 3, 4]], "output": 3 }
+            ],
+            "function_name": "lengthOfLIS",
+            "return_type": "int",
+            "argument_types": ["int[]"],
+            "starter_code": "",
+            "created_by": 1,
+            "language": null,
+            "is_public": true,
+            "created_at": "2023-01-01T00:00:00Z",
+            "updated_at": "2023-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "problems.problem",
+        "pk": 18,
+        "fields": {
+            "title": "Product of Array Except Self",
+            "slug": "product-of-array-except-self",
+            "description": "Given an integer array `nums`, return an array `answer` such that `answer[i]` is equal to the product of all the elements of `nums` except `nums[i]`.\n\nThe product of any prefix or suffix of `nums` is guaranteed to fit in a 32-bit integer.\n\nYou must write an algorithm that runs in `O(n)` time and without using the division operation.\n\n**Example 1:**\n```\nInput: nums = [1,2,3,4]\nOutput: [24,12,8,6]\n```\n\n**Example 2:**\n```\nInput: nums = [-1,1,0,-3,3]\nOutput: [0,0,9,0,0]\n```\n\n**Constraints:**\n- `2 <= nums.length <= 10^5`\n- `-30 <= nums[i] <= 30`\n- The product of any prefix or suffix of `nums` is guaranteed to fit in a 32-bit integer.\n\n**Follow up:** Can you solve the problem in `O(1)` extra space complexity? (The output array does not count as extra space.)",
+            "difficulty": "Medium",
+            "time_limit": 2.0,
+            "memory_limit": 256000,
+            "test_cases": [
+                { "input": [[1, 2, 3, 4]], "output": [24, 12, 8, 6] },
+                { "input": [[-1, 1, 0, -3, 3]], "output": [0, 0, 9, 0, 0] },
+                { "input": [[1, 1]], "output": [1, 1] },
+                { "input": [[2, 3]], "output": [3, 2] },
+                { "input": [[0, 0]], "output": [0, 0] },
+                { "input": [[1, 0]], "output": [0, 1] },
+                { "input": [[0, 1]], "output": [1, 0] },
+                { "input": [[1, 2, 3, 4, 5]], "output": [120, 60, 40, 30, 24] },
+                { "input": [[-1, -2, -3, -4]], "output": [-24, -12, -8, -6] },
+                { "input": [[2, 2, 2, 2]], "output": [8, 8, 8, 8] },
+                { "input": [[1, 0, 3, 0, 5]], "output": [0, 0, 0, 0, 0] }
+            ],
+            "function_name": "productExceptSelf",
+            "return_type": "int[]",
+            "argument_types": ["int[]"],
+            "starter_code": "",
+            "created_by": 1,
+            "language": null,
+            "is_public": true,
+            "created_at": "2023-01-01T00:00:00Z",
+            "updated_at": "2023-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "problems.problem",
+        "pk": 19,
+        "fields": {
+            "title": "Rotate Array",
+            "slug": "rotate-array",
+            "description": "Given an integer array `nums`, rotate the array to the right by `k` steps, where `k` is non-negative.\n\n**Example 1:**\n```\nInput: nums = [1,2,3,4,5,6,7], k = 3\nOutput: [5,6,7,1,2,3,4]\nExplanation:\nrotate 1 steps to the right: [7,1,2,3,4,5,6]\nrotate 2 steps to the right: [6,7,1,2,3,4,5]\nrotate 3 steps to the right: [5,6,7,1,2,3,4]\n```\n\n**Example 2:**\n```\nInput: nums = [-1,-100,3,99], k = 2\nOutput: [3,99,-1,-100]\nExplanation: \nrotate 1 steps to the right: [99,-1,-100,3]\nrotate 2 steps to the right: [3,99,-1,-100]\n```\n\n**Constraints:**\n- `1 <= nums.length <= 10^5`\n- `-2^31 <= nums[i] <= 2^31 - 1`\n- `0 <= k <= 10^5`\n\n**Follow up:**\n- Try to come up with as many solutions as you can. There are at least three different ways to solve this problem.\n- Could you do it in-place with `O(1)` extra space?",
+            "difficulty": "Medium",
+            "time_limit": 2.0,
+            "memory_limit": 256000,
+            "test_cases": [
+                {
+                    "input": [[1, 2, 3, 4, 5, 6, 7], 3],
+                    "output": [5, 6, 7, 1, 2, 3, 4]
+                },
+                {
+                    "input": [[-1, -100, 3, 99], 2],
+                    "output": [3, 99, -1, -100]
+                },
+                { "input": [[1], 0], "output": [1] },
+                { "input": [[1], 1], "output": [1] },
+                { "input": [[1, 2], 1], "output": [2, 1] },
+                { "input": [[1, 2, 3], 4], "output": [3, 1, 2] },
+                { "input": [[1, 2, 3, 4, 5], 5], "output": [1, 2, 3, 4, 5] },
+                { "input": [[1, 2, 3, 4, 5], 10], "output": [1, 2, 3, 4, 5] },
+                {
+                    "input": [[1, 2, 3, 4, 5, 6], 2],
+                    "output": [5, 6, 1, 2, 3, 4]
+                },
+                {
+                    "input": [[1, 2, 3, 4, 5, 6], 0],
+                    "output": [1, 2, 3, 4, 5, 6]
+                }
+            ],
+            "function_name": "rotate",
+            "return_type": "int[]",
+            "argument_types": ["int[]", "int"],
+            "starter_code": "",
+            "created_by": 1,
+            "language": null,
+            "is_public": true,
+            "created_at": "2023-01-01T00:00:00Z",
+            "updated_at": "2023-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "problems.problem",
+        "pk": 20,
+        "fields": {
+            "title": "Find First and Last Position in Sorted Array",
+            "slug": "find-first-and-last-position-in-sorted-array",
+            "description": "Given an array of integers `nums` sorted in non-decreasing order, find the starting and ending position of a given `target` value.\n\nIf `target` is not found in the array, return `[-1, -1]`.\n\nYou must write an algorithm with `O(log n)` runtime complexity.\n\n**Example 1:**\n```\nInput: nums = [5,7,7,8,8,10], target = 8\nOutput: [3,4]\n```\n\n**Example 2:**\n```\nInput: nums = [5,7,7,8,8,10], target = 6\nOutput: [-1,-1]\n```\n\n**Example 3:**\n```\nInput: nums = [], target = 0\nOutput: [-1,-1]\n```\n\n**Constraints:**\n- `0 <= nums.length <= 10^5`\n- `-10^9 <= nums[i] <= 10^9`\n- `nums` is a non-decreasing array.\n- `-10^9 <= target <= 10^9`",
+            "difficulty": "Medium",
+            "time_limit": 2.0,
+            "memory_limit": 256000,
+            "test_cases": [
+                { "input": [[5, 7, 7, 8, 8, 10], 8], "output": [3, 4] },
+                { "input": [[5, 7, 7, 8, 8, 10], 6], "output": [-1, -1] },
+                { "input": [[], 0], "output": [-1, -1] },
+                { "input": [[1], 1], "output": [0, 0] },
+                { "input": [[1], 0], "output": [-1, -1] },
+                { "input": [[1, 1, 1, 1, 1], 1], "output": [0, 4] },
+                { "input": [[1, 2, 3, 4, 5], 3], "output": [2, 2] },
+                { "input": [[1, 2, 3, 4, 5], 6], "output": [-1, -1] },
+                { "input": [[2, 2], 2], "output": [0, 1] },
+                { "input": [[1, 3, 3, 3, 5], 3], "output": [1, 3] },
+                { "input": [[1, 2, 2, 2, 2, 2, 3], 2], "output": [1, 5] }
+            ],
+            "function_name": "searchRange",
+            "return_type": "int[]",
+            "argument_types": ["int[]", "int"],
+            "starter_code": "",
+            "created_by": 1,
+            "language": null,
+            "is_public": true,
+            "created_at": "2023-01-01T00:00:00Z",
+            "updated_at": "2023-01-01T00:00:00Z"
+        }
+    }
+]

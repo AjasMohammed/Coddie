@@ -1,0 +1,42 @@
+[
+    {
+        "model": "problems.programminglanguage",
+        "pk": 1,
+        "fields": {
+            "name": "Python",
+            "slug": "python",
+            "boilerplate": "class Solution:\n    def {{ function_name }}({{ parameters }}):\n        # Write your solution here\n        pass",
+            "driver_template": "import sys\nimport json\n\n# --- USER CODE ---\n{{ user_code }}\n# -----------------\n\ndef run():\n    test_cases = {{ test_cases_json }}\n    sol = Solution()\n    return_type = \"{{ return_type }}\"\n\n    for i, case in enumerate(test_cases):\n        inputs = case['input']\n        expected = case['output']\n        try:\n            # Dynamic method call\n            func = getattr(sol, \"{{ function_name }}\")\n            result = func(*inputs)\n\n            # Type checking\n            if result is None and return_type != \"void\":\n                print(json.dumps({\"status\": \"Runtime Error\", \"input\": inputs, \"expected\": expected, \"error\": f\"Output type mismatch. Expected {return_type}, got NoneType\"}))\n                return\n\n            if result != expected:\n                print(json.dumps({\"status\": \"Wrong Answer\", \"input\": inputs, \"expected\": expected, \"actual\": result}))\n                return\n        except Exception as e:\n            error_msg = str(e)\n            if \"NoneType\" in error_msg or \"type\" in error_msg.lower():\n                if \"Expected\" not in error_msg and return_type:\n                    error_msg = f\"Output type mismatch. Expected {return_type}, got {type(result).__name__ if 'result' in locals() else 'NoneType'}\"\n            print(json.dumps({\"status\": \"Runtime Error\", \"input\": inputs, \"expected\": expected, \"error\": error_msg}))\n            return\n\n    print(json.dumps({\"status\": \"Accepted\"}))\n\nif __name__ == \"__main__\":\n    run()"
+        }
+    },
+    {
+        "model": "problems.programminglanguage",
+        "pk": 2,
+        "fields": {
+            "name": "JavaScript",
+            "slug": "javascript",
+            "boilerplate": "/**\n * @param {any} args\n * @return {{{ return_type }}}\n */\nvar {{ function_name }} = function({{ parameters }}) {\n    // Write your solution here\n};",
+            "driver_template": "const fs = require('fs');\n\n// --- USER CODE ---\n{{ user_code }}\n// -----------------\n\nfunction run() {\n    const testCases = {{ test_cases_json }};\n    const returnType = \"{{ return_type }}\";\n    \n    for (let i = 0; i < testCases.length; i++) {\n        const testCase = testCases[i];\n        const inputs = testCase.input;\n        const expected = testCase.output;\n        \n        try {\n            // Dynamic function call\n            const funcName = \"{{ function_name }}\";\n            let func;\n            try {\n                func = eval(funcName);\n            } catch (e) {\n                // Function not found\n            }\n            \n            if (typeof func !== 'function') {\n                 // Try to find it on global/this\n                 if (typeof this[funcName] === 'function') {\n                     func = this[funcName];\n                 } else {\n                     throw new Error(`Function ${funcName} not found`);\n                 }\n            }\n\n            const result = func(...inputs);\n\n            // Type checking (basic)\n            if (result === undefined && returnType !== \"void\") {\n                 console.log(JSON.stringify({status: \"Runtime Error\", input: inputs, expected: expected, error: `Output type mismatch. Expected ${returnType}, got undefined`}));\n                 return;\n            }\n            \n            if (JSON.stringify(result) !== JSON.stringify(expected)) {\n                 console.log(JSON.stringify({status: \"Wrong Answer\", input: inputs, expected: expected, actual: result}));\n                 return;\n            }\n\n        } catch (e) {\n            console.log(JSON.stringify({status: \"Runtime Error\", input: inputs, expected: expected, error: e.message}));\n            return;\n        }\n    }\n    console.log(JSON.stringify({status: \"Accepted\"}));\n}\n\nrun();"
+        }
+    },
+    {
+        "model": "problems.programminglanguage",
+        "pk": 3,
+        "fields": {
+            "name": "C++",
+            "slug": "cpp",
+            "boilerplate": "class Solution {\npublic:\n    {{ return_type }} {{ function_name }}({{ parameters }}) {\n        // Write your solution here\n    }\n};",
+            "driver_template": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n#include <map>\n\nusing namespace std;\n\n// --- USER CODE ---\n{{ user_code }}\n// -----------------\n\nint main() {\n    // Test Cases\n    {% for case in test_cases_cpp %}\n    {\n        // Inputs\n        {% for input in case.inputs %}\n        {{ input.type }} arg{{ forloop.counter0 }} = {{ input.value }};\n        {% endfor %}\n\n        // Call\n        Solution sol;\n        auto result = sol.{{ function_name }}({% for input in case.inputs %}arg{{ forloop.counter0 }}{% if not forloop.last %}, {% endif %}{% endfor %});\n\n        // Check\n        auto expected = {{ case.expected }};\n        if (result == expected) {\n            // Passed\n        } else {\n            cout << \"{\\\"status\\\": \\\"Wrong Answer\\\", \\\"expected\\\": \\\"\" << expected << \"\\\", \\\"actual\\\": \\\"\" << result << \"\\\"}\" << endl;\n            return 0;\n        }\n    }\n    {% endfor %}\n    cout << \"{\\\"status\\\": \\\"Accepted\\\"}\" << endl;\n    return 0;\n}"
+        }
+    },
+    {
+        "model": "problems.programminglanguage",
+        "pk": 4,
+        "fields": {
+            "name": "Java",
+            "slug": "java",
+            "boilerplate": "class Solution {\n    public {{ return_type }} {{ function_name }}({{ parameters }}) {\n        // Write your solution here\n    }\n}",
+            "driver_template": "import java.util.*;\n\n// --- USER CODE ---\n{{ user_code }}\n// -----------------\n\npublic class Main {\n    public static void main(String[] args) {\n        // Test Cases\n        {% for case in test_cases_java %}\n        {\n            // Inputs\n            {% for input in case.inputs %}\n            {{ input.type }} arg{{ forloop.counter0 }} = {{ input.value }};\n            {% endfor %}\n\n            // Call\n            Solution sol = new Solution();\n            Object result = sol.{{ function_name }}({% for input in case.inputs %}arg{{ forloop.counter0 }}{% if not forloop.last %}, {% endif %}{% endfor %});\n\n            // Check\n            Object expected = {{ case.expected }};\n            \n            if (java.util.Objects.deepEquals(result, expected)) {\n                // Passed\n            } else {\n                System.out.println(\"{\\\"status\\\": \\\"Wrong Answer\\\", \\\"expected\\\": \\\"\" + expected + \"\\\", \\\"actual\\\": \\\"\" + result + \"\\\"}\");\n                return;\n            }\n        }\n        {% endfor %}\n        System.out.println(\"{\\\"status\\\": \\\"Accepted\\\"}\");\n    }\n}"
+        }
+    }
+]

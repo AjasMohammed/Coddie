@@ -1,0 +1,12 @@
+[
+    {
+        "model": "problems.programminglanguage",
+        "pk": 1,
+        "fields": {
+            "name": "Python",
+            "slug": "python",
+            "boilerplate": "class Solution:\n    def solve(self, args):\n        pass",
+            "driver_template": "\nimport sys\nimport json\n\n# --- USER CODE ---\n{{ user_code }}\n# -----------------\n\ndef run():\n    test_cases = {{ test_cases_json }}\n    sol = Solution()\n    return_type = \"{{ return_type }}\"\n    \n    for i, case in enumerate(test_cases):\n        inputs = case['input']\n        expected = case['output']\n        try:\n            # Dynamic method call\n            func = getattr(sol, \"{{ function_name }}\")\n            result = func(*inputs)\n            \n            # Type checking\n            if result is None and return_type != \"void\":\n                print(json.dumps({\"status\": \"Runtime Error\", \"input\": inputs, \"expected\": expected, \"error\": f\"Output type mismatch. Expected {return_type}, got NoneType\"}))\n                return\n            \n            if result != expected:\n                print(json.dumps({\"status\": \"Wrong Answer\", \"input\": inputs, \"expected\": expected, \"actual\": result}))\n                return\n        except Exception as e:\n            error_msg = str(e)\n            # Check if it's a type mismatch error\n            if \"NoneType\" in error_msg or \"type\" in error_msg.lower():\n                if \"Expected\" not in error_msg and return_type:\n                    error_msg = f\"Output type mismatch. Expected {return_type}, got {type(result).__name__ if 'result' in locals() else 'NoneType'}\"\n            print(json.dumps({\"status\": \"Runtime Error\", \"input\": inputs, \"expected\": expected, \"error\": error_msg}))\n            return\n            \n    print(json.dumps({\"status\": \"Accepted\"}))\n\nif __name__ == \"__main__\":\n    run()\n"
+        }
+    }
+]
