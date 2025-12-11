@@ -1,0 +1,34 @@
+import java.util.*;
+
+// --- USER CODE ---
+{{ user_code }}
+// -----------------
+
+public class Main {
+    public static void main(String[] args) {
+        // Test Cases
+        {% for case in test_cases_java %}
+        {
+            // Inputs
+            {% for input in case.inputs %}
+            {{ input.type }} arg{{ forloop.counter0 }} = {{ input.value }};
+            {% endfor %}
+
+            // Call
+            Solution sol = new Solution();
+            Object result = sol.{{ function_name }}({% for input in case.inputs %}arg{{ forloop.counter0 }}{% if not forloop.last %}, {% endif %}{% endfor %});
+
+            // Check
+            Object expected = {{ case.expected }};
+
+            if (java.util.Objects.deepEquals(result, expected)) {
+                // Passed
+            } else {
+                System.out.println("{\"status\": \"Wrong Answer\", \"expected\": \"" + expected + "\", \"actual\": \"" + result + "\"}");
+                return;
+            }
+        }
+        {% endfor %}
+        System.out.println("{\"status\": \"Accepted\"}");
+    }
+}

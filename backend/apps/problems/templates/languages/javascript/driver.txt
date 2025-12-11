@@ -1,0 +1,73 @@
+const fs = require('fs');
+
+// --- USER CODE ---
+{{ user_code }}
+// -----------------
+
+function run() {
+    const testCases = {{ test_cases_literal }};
+    const returnType = "{{ return_type }}";
+
+    for (let i = 0; i < testCases.length; i++) {
+        const testCase = testCases[i];
+        const inputs = testCase.input;
+        const expected = testCase.output;
+
+        try {
+            // Dynamic function call
+            const funcName = "{{ function_name }}";
+            let func;
+            try {
+                func = eval(funcName);
+            } catch (e) {
+                // Function not found
+            }
+
+            if (typeof func !== 'function') {
+                 // Try to find it on global/this
+                 if (typeof this[funcName] === 'function') {
+                     func = this[funcName];
+                 } else {
+                     throw new Error(`Function ${funcName} not found`);
+                 }
+            }
+
+            const result = func(...inputs);
+
+            // Type checking (basic)
+            if (result === undefined && returnType !== "void") {
+                 console.log(JSON.stringify({status: "Runtime Error", input: inputs, expected: expected, error: `Output type mismatch. Expected ${returnType}, got undefined`}));
+                 return;
+            }
+
+            // Strict Type Validation
+            let typeError = null;
+            if ((returnType === "int" || returnType === "integer" || returnType === "float") && typeof result !== "number") {
+                 typeError = `Expected number, got ${typeof result}`;
+            } else if ((returnType === "string" || returnType === "str") && typeof result !== "string") {
+                 typeError = `Expected string, got ${typeof result}`;
+            } else if ((returnType === "bool" || returnType === "boolean") && typeof result !== "boolean") {
+                 typeError = `Expected boolean, got ${typeof result}`;
+            } else if ((returnType.includes("[]") || returnType.includes("List")) && !Array.isArray(result)) {
+                 typeError = `Expected array, got ${typeof result}`;
+            }
+
+            if (typeError) {
+                 console.log(JSON.stringify({status: "Runtime Error", input: inputs, expected: expected, error: `Output type mismatch. ${typeError}`}));
+                 return;
+            }
+
+            if (JSON.stringify(result) !== JSON.stringify(expected)) {
+                 console.log(JSON.stringify({status: "Wrong Answer", input: inputs, expected: expected, actual: result}));
+                 return;
+            }
+
+        } catch (e) {
+            console.log(JSON.stringify({status: "Runtime Error", input: inputs, expected: expected, error: e.message}));
+            return;
+        }
+    }
+    console.log(JSON.stringify({status: "Accepted"}));
+}
+
+run();

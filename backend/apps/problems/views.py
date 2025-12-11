@@ -94,6 +94,7 @@ class ProblemDetailView(APIView):
                 )
 
         serializer = ProblemDetailSerializer(problem)
+        print("PROBLEM DETAIL: ", serializer.data)
         return Response(serializer.data)
 
 
@@ -143,12 +144,14 @@ class ProblemCreateView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request):
+        print("REQUEST DATA: ", request.data)
         serializer = ProblemCreateSerializer(data=request.data)
         if serializer.is_valid():
             problem = serializer.save(created_by=request.user)
             # Return full detail
             detail_serializer = ProblemDetailSerializer(problem)
             return Response(detail_serializer.data, status=status.HTTP_201_CREATED)
+        print("ERRORS: ", serializer.errors)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 

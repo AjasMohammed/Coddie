@@ -44,7 +44,7 @@ class Problem(models.Model):
         INTEGER = "int", "int"
         STRING = "string", "string"
         FLOAT = "float", "float"
-        BOOLEAN = "bool", "bool"
+        BOOLEAN = "boolean", "boolean"
         VOID = "void", "void"
 
     return_type = models.CharField(

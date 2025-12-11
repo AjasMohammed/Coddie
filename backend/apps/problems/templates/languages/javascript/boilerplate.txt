@@ -1,0 +1,7 @@
+/**
+ * @param {any} args
+ * @return {{{ return_type }}}
+ */
+var {{ function_name }} = function({{ parameters }}) {
+    // Write your solution here
+};

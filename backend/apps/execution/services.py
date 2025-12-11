@@ -24,6 +24,14 @@ class DriverTemplateService:
             "argument_types": problem.argument_types,
         }
 
+        # Generate language-specific literal for test_cases
+        if language.slug == "python":
+            # Python needs True/False/None
+            context_data["test_cases_literal"] = mark_safe(repr(test_cases))
+        else:
+            # JS and others use JSON format (true/false/null)
+            context_data["test_cases_literal"] = mark_safe(json.dumps(test_cases))
+
         if language.slug == "cpp":
             context_data["test_cases_cpp"] = DriverTemplateService._format_cpp(
                 test_cases, problem.argument_types

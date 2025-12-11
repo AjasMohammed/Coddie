@@ -1,0 +1,38 @@
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <map>
+
+using namespace std;
+
+// --- USER CODE ---
+{{ user_code }}
+// -----------------
+
+int main() {
+    // Test Cases
+    {% for case in test_cases_cpp %}
+    {
+        // Inputs
+        {% for input in case.inputs %}
+        {{ input.type }} arg{{ forloop.counter0 }} = {{ input.value }};
+        {% endfor %}
+
+        // Call
+        Solution sol;
+        auto result = sol.{{ function_name }}({% for input in case.inputs %}arg{{ forloop.counter0 }}{% if not forloop.last %}, {% endif %}{% endfor %});
+
+        // Check
+        auto expected = {{ case.expected }};
+        if (result == expected) {
+            // Passed
+        } else {
+            cout << "{\"status\": \"Wrong Answer\", \"expected\": \"" << expected << "\", \"actual\": \"" << result << "\"}" << endl;
+            return 0;
+        }
+    }
+    {% endfor %}
+    cout << "{\"status\": \"Accepted\"}" << endl;
+    return 0;
+}

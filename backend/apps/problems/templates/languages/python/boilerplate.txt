@@ -1,0 +1,4 @@
+class Solution:
+    def {{ function_name }}({{ parameters }}):
+        # Write your solution here
+        pass

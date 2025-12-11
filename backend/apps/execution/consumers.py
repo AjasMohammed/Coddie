@@ -153,7 +153,9 @@ class CodeExecutionConsumer(AsyncWebsocketConsumer):
             full_code = await sync_to_async(DriverTemplateService.generate_driver_code)(
                 language, user_code, problem, test_cases
             )
-
+            print("+==============================================")
+            print("Full Code to Execute:\n", full_code)
+            print("+==============================================")
             # Execute code via Piston
             client = PistonClient()
             result = await sync_to_async(client.execute)(
